@@ -6,7 +6,9 @@ import androidx.room.Room
 import com.android.myapplication.contact.api.ContactApi
 import com.android.myapplication.contact.persistence.ContactDB
 import com.android.myapplication.contact.repository.ContactRepository
-import com.android.myapplication.contact.ui.list.MovieListViewModel
+import com.android.myapplication.contact.ui.contact.AddContactViewModel
+import com.android.myapplication.contact.ui.detail.DetailContactViewModel
+import com.android.myapplication.contact.ui.main.MainContactViewModel
 import com.android.myapplication.contact.util.AppExecutors
 import com.android.myapplication.util.LiveDataCallAdapterFactory
 import okhttp3.OkHttpClient
@@ -42,7 +44,21 @@ val apiModule = module {
 val viewModelModule = module {
     viewModel {
         val repository: ContactRepository = get()
-        MovieListViewModel(
+        MainContactViewModel(
+            repository,
+            androidApplication()
+        )
+    }
+    viewModel {
+        val repository: ContactRepository = get()
+        AddContactViewModel(
+            repository,
+            androidApplication()
+        )
+    }
+    viewModel {
+        val repository: ContactRepository = get()
+        DetailContactViewModel(
             repository,
             androidApplication()
         )
